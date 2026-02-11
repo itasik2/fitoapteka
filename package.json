@@ -1,0 +1,35 @@
+{
+  "name": "pro-cosmetics-shop",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma migrate deploy && next build",
+    "start": "next start",
+    "postinstall": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "node prisma/seed.mjs"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.1",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "cloudinary": "^2.8.0",
+    "next": "14.2.35",
+    "next-auth": "5.0.0-beta.20",
+    "openai": "^4.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "stripe": "16.6.0",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.23",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.4.47",
+    "prisma": "^6.19.1",
+    "tailwindcss": "3.4.13",
+    "typescript": "5.6.2"
+  }
+}
