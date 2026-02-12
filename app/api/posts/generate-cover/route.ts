@@ -2,7 +2,7 @@
 export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
-import { openai } from "@/lib/openai";
+import { getOpenAIClient } from "@/lib/openai";
 import { v2 as cloudinary } from "cloudinary";
 import { requireAdmin } from "@/lib/adminGuard";
 
@@ -59,6 +59,8 @@ High quality, modern, clean composition, suitable for cosmetics e-commerce blog.
 
     // Генерация изображения (типовой вызов OpenAI Images API)
     // Если ваш SDK не поддерживает openai.images.generate — адаптируйте на свою версию.
+    const openai = getOpenAIClient();
+
     const img = await (openai as any).images.generate({
       model: "gpt-image-1",
       prompt,
