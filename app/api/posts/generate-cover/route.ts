@@ -2,7 +2,7 @@
 export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
-import { openai } from "@/lib/openai";
+import { getOpenAIClient } from "@/lib/openai";
 import { v2 as cloudinary } from "cloudinary";
 import { requireAdmin } from "@/lib/adminGuard";
 
@@ -39,6 +39,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "cloudinary_not_configured" }, { status: 500 });
     }
 
+    if (!process.env.OPENAI_API_KEY) {
+      return NextResponse.json({ error: "no_api_key" }, { status: 500 });
+    }
+
     // вход
     const json = (await req.json().catch(() => ({}))) as Body;
     const topic = (json.topic || "").trim();
@@ -59,6 +63,8 @@ High quality, modern, clean composition, suitable for cosmetics e-commerce blog.
 
     // Генерация изображения (типовой вызов OpenAI Images API)
     // Если ваш SDK не поддерживает openai.images.generate — адаптируйте на свою версию.
+    const openai = getOpenAIClient();
+
     const img = await (openai as any).images.generate({
       model: "gpt-image-1",
       prompt,
