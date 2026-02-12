@@ -39,6 +39,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "cloudinary_not_configured" }, { status: 500 });
     }
 
+    if (!process.env.OPENAI_API_KEY) {
+      return NextResponse.json({ error: "no_api_key" }, { status: 500 });
+    }
+
     // вход
     const json = (await req.json().catch(() => ({}))) as Body;
     const topic = (json.topic || "").trim();

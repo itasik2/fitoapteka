@@ -7,6 +7,14 @@ function getBaseUrl() {
   return getPublicBaseUrl();
 }
 
+function isDatabaseUnavailable(error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  return (
+    message.includes("Environment variable not found: DATABASE_URL") ||
+    message.includes("Can't reach database server")
+  );
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getBaseUrl();
 
@@ -54,7 +62,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [...staticRoutes, ...productRoutes, ...postRoutes];
   } catch (error) {
-    console.warn("Failed to load dynamic sitemap routes, returning static routes only", error);
-    return staticRoutes;
+    if (isDatabaseUnavailable(error)) {
+      console.warn("Sitemap dynamic routes skipped: database is unavailable.");
+      return staticRoutes;
+    }
+
+    throw error;
   }
 }
