@@ -24,13 +24,13 @@ export default function Navbar() {
       href === "/" ? pathname === "/" : pathname.startsWith(href);
 
     return (
-      "hover:underline " +
+      "hover:text-brand transition-colors " +
       (isActive ? "font-semibold text-gray-900" : "text-gray-700")
     );
   };
 
   return (
-    <header className="border-b bg-white/70 backdrop-blur sticky top-0 z-50">
+    <header className="border-b bg-white/90 backdrop-blur sticky top-0 z-50">
       <div className="container flex items-center justify-between py-3">
         <Link href="/" className="font-bold tracking-tight text-lg">
           {process.env.NEXT_PUBLIC_SITE_BRAND ?? "Shop"}
