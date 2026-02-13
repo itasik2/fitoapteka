@@ -27,14 +27,14 @@ const defaultsBySite: Record<string, SitePreset> = {
   },
   fitoapteka: {
     brand: "fitoapteka.kz",
-    title: "FitoApteka — аптека и фитопродукты",
-    description: "Фитопродукты, БАДы и товары для здоровья с доставкой по Казахстану.",
-    nicheLabel: "аптека и фитопродукты",
-    heroTitle: "Фитопродукты и товары для здоровья — в одном месте",
+    title: "FitoApteka — фитоаптека и товары для здоровья",
+    description: "Фитоаптека, фитопродукты и товары для здоровья с доставкой по Казахстану.",
+    nicheLabel: "фитоаптека и товары для здоровья",
+    heroTitle: "Фитоаптека и товары для здоровья — в одном месте",
     heroSubtitle:
-      "Проверенные категории: витамины, фиточаи, БАДы и сопутствующие товары с понятным описанием и аккуратным подбором.",
+      "Проверенные категории: витамины, фиточаи, БАДы и сопутствующие товары с понятным описанием.",
     aboutSummary:
-      "онлайн-витрина фитопродуктов и товаров для здоровья. Мы собираем ассортимент с понятным составом и аккуратной подачей без лишних обещаний.",
+      "онлайн-витрина фитоаптеки и товаров для здоровья. Мы собираем ассортимент с понятным составом и аккуратной подачей без лишних обещаний.",
     aboutGoal:
       "Наша цель — помочь подобрать понятные товары для ежедневной поддержки здоровья и благополучия без агрессивных маркетинговых обещаний.",
   },
@@ -53,8 +53,29 @@ export const SITE_ABOUT_GOAL = process.env.SITE_ABOUT_GOAL || preset.aboutGoal;
 
 export const SITE_ENV_SUFFIX = SITE_KEY.replace(/[^a-zA-Z0-9]/g, "_").toUpperCase();
 
+function toAbsoluteHttpUrl(raw: string) {
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+
+  const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+
+  try {
+    const parsed = new URL(withProtocol);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return null;
+    return parsed.origin;
+  } catch {
+    return null;
+  }
+}
+
 export function getPublicBaseUrl() {
-  return (process.env.NEXT_PUBLIC_URL || `https://${SITE_BRAND}`).replace(/\/$/, "");
+  const explicit = toAbsoluteHttpUrl(process.env.NEXT_PUBLIC_URL || "");
+  if (explicit) return explicit;
+
+  const fromBrand = toAbsoluteHttpUrl(SITE_BRAND);
+  if (fromBrand) return fromBrand;
+
+  return "https://example.com";
 }
 
 export function getScopedEnv(name: string) {
