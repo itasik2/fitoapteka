@@ -2,7 +2,7 @@
 export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
-import { openai } from "@/lib/openai";
+import { getOpenAIClient } from "@/lib/openai";
 import { requireAdmin } from "@/lib/adminGuard";
 
 type Body = {
@@ -150,6 +150,8 @@ export async function POST(req: Request) {
 - Без медицинских диагнозов и лечебных обещаний.
 - Если есть ограничения (беременность/ретиноиды/кислоты/чувствительность) — формулируй как осторожность и общий совет обратиться к специалисту.
 `.trim();
+
+    const openai = getOpenAIClient();
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",

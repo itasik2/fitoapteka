@@ -1,6 +1,6 @@
 // components/Footer.tsx
 import Link from "next/link";
-import { SITE_BRAND } from "@/lib/siteConfig";
+import { SITE_BRAND, SITE_NICHE_LABEL } from "@/lib/siteConfig";
 
 function SocialIcon({
   href,
@@ -63,8 +63,7 @@ export default function Footer() {
           <div>
             <div className="font-semibold text-base">{SITE_BRAND}</div>
             <p>
-              Магазин профессиональной косметики для домашнего ухода:
-              понятные составы и честные описания.
+              Магазин категории «{SITE_NICHE_LABEL}»: понятные составы и честные описания.
             </p>
           </div>
 
@@ -157,9 +156,7 @@ export default function Footer() {
           <div className="md:w-1/2 space-y-2 max-w-md">
             <div className="font-semibold text-base">{SITE_BRAND}</div>
             <p>
-              Магазин профессиональной косметики для домашнего ухода. Подбираем
-              рабочие средства без лишнего шума: понятные составы, честные
-              описания и адекватные цены.
+              Магазин категории «{SITE_NICHE_LABEL}». Подбираем средства без лишнего шума: понятные составы, честные описания и адекватные цены.
             </p>
           </div>
 
