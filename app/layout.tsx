@@ -93,7 +93,7 @@ export default async function RootLayout({
         ) : null}
 
         {/* Контент */}
-        <div className="min-h-screen flex flex-col bg-white/85">
+        <div className="min-h-screen flex flex-col bg-brand-soft">
           <Providers>
             <Navbar />
 
