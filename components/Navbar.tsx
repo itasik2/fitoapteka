@@ -35,7 +35,7 @@ export default function Navbar() {
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/logo.png"            // <-- файл: public/logo.png
+            src="/fitoapteka-logo.png"            // <-- файл: public/logo.png
             alt={process.env.NEXT_PUBLIC_SITE_BRAND ?? "Shop"}
             width={220}
             height={60}
