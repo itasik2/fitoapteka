@@ -1,4 +1,4 @@
-export const SITE_KEY = (process.env.SITE_KEY || "procosmetics").trim();
+export const SITE_KEY = (process.env.SITE_KEY || "fitoapteka").trim();
 
 type SitePreset = {
   brand: string;
@@ -40,7 +40,7 @@ const defaultsBySite: Record<string, SitePreset> = {
   },
 };
 
-const preset = defaultsBySite[SITE_KEY] || defaultsBySite.procosmetics;
+const preset = defaultsBySite[SITE_KEY] || defaultsBySite.fitoapteka;
 
 export const SITE_BRAND = process.env.NEXT_PUBLIC_SITE_BRAND || preset.brand;
 export const SITE_TITLE = process.env.SITE_TITLE || preset.title;

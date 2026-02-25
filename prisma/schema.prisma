@@ -114,11 +114,11 @@ model Post {
 
 model SiteSettings {
   id          String   @id @default("default")
-  siteName    String   @default("pro.cosmetics")
-  heroTitle   String   @default("Профессиональная косметика для ухода за кожей")
-  heroSubtitle String  @default("Подбираем эффективные средства для домашнего ухода.")
+  siteName    String   @default("fitoapteka.kz")
+  heroTitle   String   @default("Фитоаптека и товары для здоровья")
+  heroSubtitle String  @default("Проверенные фитопродукты и wellness-товары для ежедневной поддержки здоровья.")
   heroImage   String?  @default("/seed/serum.jpg")
-  footerText  String   @default("Интернет-магазин профессиональной косметики")
+  footerText  String   @default("Интернет-магазин фитоаптеки и товаров для здоровья")
   phone       String?  @default("+7")
   email       String?  @default("sales@vita-services.com")
   updatedAt   DateTime @updatedAt
@@ -152,7 +152,6 @@ model ThemeSettings {
 
   updatedAt       DateTime @updatedAt
 }
-
 
 
 
