@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -20,8 +21,7 @@ export default function Navbar() {
   }, [pathname]);
 
   const navLinkClass = (href: string) => {
-    const isActive =
-      href === "/" ? pathname === "/" : pathname.startsWith(href);
+    const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
 
     return (
       "hover:text-brand transition-colors " +
@@ -32,13 +32,19 @@ export default function Navbar() {
   return (
     <header className="border-b bg-white/90 backdrop-blur sticky top-0 z-50">
       <div className="container flex items-center justify-between py-3">
-        <Link href="/" className="font-bold tracking-tight text-lg">
-          {process.env.NEXT_PUBLIC_SITE_BRAND ?? "Shop"}
+        {/* LOGO */}
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/logo.png"            // <-- файл: public/logo.png
+            alt={process.env.NEXT_PUBLIC_SITE_BRAND ?? "Shop"}
+            width={220}
+            height={60}
+            priority
+            className="h-10 w-auto"    // высота в шапке, ширина авто
+          />
         </Link>
 
-
         <nav className="hidden md:flex gap-6 text-sm">
-          {/* Новая кнопка */}
           <Link href="/" className={navLinkClass("/")}>
             Главная
           </Link>
@@ -59,7 +65,6 @@ export default function Navbar() {
             Q&amp;A
           </Link>
 
-          {/* вместо "Админ" */}
           <Link href={adminHref} className={navLinkClass(adminHref)}>
             {status === "loading" ? "…" : adminLabel}
           </Link>
@@ -77,7 +82,6 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden border-t">
           <div className="container py-2 flex flex-col gap-2 text-sm">
-            {/* Новая кнопка */}
             <Link href="/" className={navLinkClass("/")}>
               Главная
             </Link>
