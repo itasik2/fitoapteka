@@ -37,8 +37,8 @@ export default function Navbar() {
           <Image
             src="/fitoapteka-logo.png"            // <-- файл: public/logo.png
             alt={process.env.NEXT_PUBLIC_SITE_BRAND ?? "Shop"}
-            width={220}
-            height={60}
+            width={300}
+            height={90}
             priority
             className="h-10 w-auto"    // высота в шапке, ширина авто
           />
