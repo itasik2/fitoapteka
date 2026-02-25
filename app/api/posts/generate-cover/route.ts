@@ -55,10 +55,10 @@ export async function POST(req: Request) {
     // prompt: делаем безопасный, без брендов/логотипов
     const style = pickStyle(category);
     const prompt = `
-Minimal, premium skincare blog cover image.
+Minimal, premium phytopharmacy and wellness blog cover image.
 Theme: "${topic}".
 Style: ${style}. Soft background, product-agnostic, no text, no logos, no watermark.
-High quality, modern, clean composition, suitable for cosmetics e-commerce blog.
+High quality, modern, clean composition, suitable for phytopharmacy and wellness e-commerce blog.
 `.trim();
 
     // Генерация изображения (типовой вызов OpenAI Images API)
@@ -82,7 +82,7 @@ High quality, modern, clean composition, suitable for cosmetics e-commerce blog.
     const uploaded = await new Promise<any>((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         {
-          folder: "pro-cosmetics/blog",
+          folder: "fitoapteka/blog",
           resource_type: "image",
           eager: [
             {

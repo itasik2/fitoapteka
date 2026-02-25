@@ -1,6 +1,6 @@
-# Pro Cosmetics Shop — Next.js eCommerce (Starter)
+# FitoApteka Shop — Next.js eCommerce (Starter)
 
-Минимальный рабочий прототип магазина профессиональной косметики.
+Минимальный рабочий прототип фитоаптеки и магазина товаров для здоровья.
 
 ## Запуск локально
 

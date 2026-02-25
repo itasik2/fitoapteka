@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     const result = await new Promise<any>((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         {
-          folder: "pro-cosmetics/products",
+          folder: "fitoapteka/products",
           resource_type: "image",
 
           // Создаём оптимизированную производную сразу (и вернём именно её URL)
