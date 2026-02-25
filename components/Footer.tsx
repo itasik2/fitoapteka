@@ -1,5 +1,6 @@
 // components/Footer.tsx
 import Link from "next/link";
+import Image from "next/image";
 import { SITE_BRAND, SITE_NICHE_LABEL } from "@/lib/siteConfig";
 
 function SocialIcon({
@@ -20,14 +21,7 @@ function SocialIcon({
       rel="noreferrer"
       aria-label={label}
       title={label}
-      className={[
-        // форма
-        "inline-flex items-center justify-center w-8 h-8 rounded-full border transition",
-        // цвет иконки (через currentColor)
-        "text-gray-500 hover:text-gray-900",
-        // рамка
-        "border-gray-300 hover:border-gray-500",
-      ].join(" ")}
+      className="inline-flex items-center justify-center w-8 h-8 rounded-full border transition text-gray-500 hover:text-gray-900 border-gray-300 hover:border-gray-500"
     >
       {children}
     </a>
@@ -49,7 +43,6 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export default function Footer() {
-  // подставь реальные ссылки
   const instagramUrl = "https://instagram.com/your_profile";
   const telegramUrl = "https://t.me/your_channel";
   const whatsappUrl = "https://wa.me/7700XXXXXXX";
@@ -57,110 +50,72 @@ export default function Footer() {
 
   return (
     <footer className="border-t mt-10 text-sm text-gray-600 bg-white">
-      <div className="container mx-auto py-5">
+      <div className="container mx-auto py-8">
+        
         {/* МОБИЛЬНАЯ ВЕРСИЯ */}
-        <div className="flex flex-col gap-3 md:hidden">
-          <div>
-            <div className="font-semibold text-base">{SITE_BRAND}</div>
-            <p>
-              Магазин категории «{SITE_NICHE_LABEL}»: понятные составы и честные описания.
-            </p>
-          </div>
+        <div className="flex flex-col gap-4 md:hidden">
+          <Link href="/" className="inline-block">
+            <Image
+              src="/fitoapteka-logo.png"
+              alt={SITE_BRAND}
+              width={180}
+              height={50}
+              className="h-10 w-auto"
+            />
+          </Link>
+
+          <p>
+            Магазин категории «{SITE_NICHE_LABEL}»: понятные составы и честные описания.
+          </p>
 
           <div className="flex gap-2">
-            {/* Instagram */}
             <SocialIcon href={instagramUrl} label="Instagram">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                className="w-4 h-4"
-                fill="none"
-              >
-                <rect
-                  x="3"
-                  y="3"
-                  width="18"
-                  height="18"
-                  rx="5"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                />
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="4"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                />
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
                 <circle cx="17" cy="7" r="1" fill="currentColor" />
               </svg>
             </SocialIcon>
 
-            {/* Telegram */}
             <SocialIcon href={telegramUrl} label="Telegram">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                className="w-4 h-4"
-                fill="none"
-              >
-                <path
-                  d="M20.5 4.5L3.5 11.2c-.7.3-.7 1.3 0 1.5l4.5 1.6 1.8 4.7c.2.6 1 .7 1.4.1l2.4-3.3 4.1 3.1c.6.4 1.4.1 1.5-.6l1.8-13c.1-.7-.6-1.2-1.3-1z"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M8.5 13.5L18 7.5"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                />
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none">
+                <path d="M20.5 4.5L3.5 11.2l4.5 1.6 1.8 4.7 2.4-3.3 4.1 3.1 1.8-13z" stroke="currentColor" strokeWidth="1.6" />
               </svg>
             </SocialIcon>
 
-            {/* WhatsApp */}
             <SocialIcon href={whatsappUrl} label="WhatsApp">
               <WhatsAppIcon className="w-4 h-4" />
             </SocialIcon>
 
-            {/* TikTok */}
             <SocialIcon href={tiktokUrl} label="TikTok">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                className="w-4 h-4"
-                fill="none"
-              >
-                <path
-                  d="M14.5 5.5V14a3.5 3.5 0 11-3-3.5"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M14.5 5.5c.3.9 1.1 3 3.5 3.5"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none">
+                <path d="M14.5 5.5V14a3.5 3.5 0 11-3-3.5" stroke="currentColor" strokeWidth="1.6" />
               </svg>
             </SocialIcon>
           </div>
         </div>
 
-        {/* ДЕСКТОП/ПЛАНШЕТ */}
-        <div className="hidden md:flex md:flex-row md:items-start md:justify-between md:gap-10">
-          <div className="md:w-1/2 space-y-2 max-w-md">
-            <div className="font-semibold text-base">{SITE_BRAND}</div>
+        {/* ДЕСКТОП */}
+        <div className="hidden md:flex md:justify-between md:gap-12">
+          
+          <div className="max-w-md space-y-3">
+            <Link href="/" className="inline-block">
+              <Image
+                src="/fitoapteka-logo.png"
+                alt={SITE_BRAND}
+                width={200}
+                height={60}
+                className="h-12 w-auto"
+              />
+            </Link>
+
             <p>
-              Магазин категории «{SITE_NICHE_LABEL}». Подбираем средства без лишнего шума: понятные составы, честные описания и адекватные цены.
+              Магазин категории «{SITE_NICHE_LABEL}». Подбираем средства без лишнего шума:
+              понятные составы, честные описания и адекватные цены.
             </p>
           </div>
 
-          <div className="md:w-1/2 grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-8">
             <div>
               <div className="font-semibold mb-2">Разделы</div>
               <div className="flex flex-col gap-1">
@@ -183,82 +138,18 @@ export default function Footer() {
 
             <div>
               <div className="font-semibold mb-2">Мы в соцсетях</div>
-              <div className="flex gap-2 mb-2">
+              <div className="flex gap-2">
                 <SocialIcon href={instagramUrl} label="Instagram">
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    className="w-4 h-4"
-                    fill="none"
-                  >
-                    <rect
-                      x="3"
-                      y="3"
-                      width="18"
-                      height="18"
-                      rx="5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                    />
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="4"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                    />
-                    <circle cx="17" cy="7" r="1" fill="currentColor" />
-                  </svg>
+                  <span className="w-4 h-4 bg-current rounded-full" />
                 </SocialIcon>
-
                 <SocialIcon href={telegramUrl} label="Telegram">
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    className="w-4 h-4"
-                    fill="none"
-                  >
-                    <path
-                      d="M20.5 4.5L3.5 11.2c-.7.3-.7 1.3 0 1.5l4.5 1.6 1.8 4.7c.2.6 1 .7 1.4.1l2.4-3.3 4.1 3.1c.6.4 1.4.1 1.5-.6l1.8-13c.1-.7-.6-1.2-1.3-1z"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M8.5 13.5L18 7.5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                  <span className="w-4 h-4 bg-current rounded-full" />
                 </SocialIcon>
-
                 <SocialIcon href={whatsappUrl} label="WhatsApp">
                   <WhatsAppIcon className="w-4 h-4" />
                 </SocialIcon>
-
                 <SocialIcon href={tiktokUrl} label="TikTok">
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    className="w-4 h-4"
-                    fill="none"
-                  >
-                    <path
-                      d="M14.5 5.5V14a3.5 3.5 0 11-3-3.5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M14.5 5.5c.3.9 1.1 3 3.5 3.5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <span className="w-4 h-4 bg-current rounded-full" />
                 </SocialIcon>
               </div>
             </div>
@@ -267,11 +158,10 @@ export default function Footer() {
       </div>
 
       <div className="border-t">
-        <div className="container mx-auto py-3 flex flex-col md:flex-row items-center justify-between gap-2 text-[11px] text-gray-500">
+        <div className="container mx-auto py-3 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-gray-500">
           <div>© {new Date().getFullYear()} {SITE_BRAND}. Все права защищены.</div>
           <div>
-            Не является публичной офертой. Перед применением средств
-            консультируйтесь со специалистом.
+            Не является публичной офертой. Перед применением средств консультируйтесь со специалистом.
           </div>
         </div>
       </div>
