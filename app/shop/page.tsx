@@ -23,6 +23,10 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const baseDescription = `Каталог ${SITE_BRAND}: очищающие гели, пенки, сыворотки, кремы и другие средства для ухода за кожей.`;
 
   const brandSlug = (searchParams?.brand || "").trim();
+  const sort = (searchParams?.sort || "").trim();
+  const fav = (searchParams?.fav || "").trim();
+  const instock = (searchParams?.instock || "").trim();
+
   const baseUrl = getPublicBaseUrl();
 
   let selectedBrand: { name: string; slug: string } | null = null;
@@ -36,11 +40,12 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
       take: 30,
     });
 
-    selectedBrand = brandSlug ? brands.find((b) => b.slug === brandSlug) || null : null;
+    selectedBrand = brandSlug
+      ? brands.find((b) => b.slug === brandSlug) || null
+      : null;
+
     brandKeywords = brands.map((b) => b.name);
-  } catch {
-    // metadata остаётся рабочей даже когда БД временно недоступна
-  }
+  } catch {}
 
   const title = selectedBrand
     ? `${selectedBrand.name} — каталог ${SITE_BRAND}`
@@ -61,12 +66,20 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     ...brandKeywords,
   ];
 
+  // 🚨 Разрешаем индексировать ТОЛЬКО бренд и чистый каталог
+  const allowIndex =
+    !sort && !fav && !instock;
+
   return {
     title,
     description,
     keywords,
     alternates: {
       canonical,
+    },
+    robots: {
+      index: allowIndex,
+      follow: true,
     },
     openGraph: {
       title,
