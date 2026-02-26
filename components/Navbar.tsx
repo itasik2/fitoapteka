@@ -30,17 +30,17 @@ export default function Navbar() {
   };
 
   return (
-    <header className="border-b bg-white/90 backdrop-blur sticky top-0 z-50">
-      <div className="container flex items-center justify-between py-3">
+    <header className="border-b bg-white/90 sticky top-0 z-50">
+      <div className="container flex items-center justify-between py-4">
         {/* LOGO */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="inline-flex items-center" aria-label="На главную">
           <Image
             src="/fitoapteka-logo.png"            // <-- файл: public/logo.png
             alt={process.env.NEXT_PUBLIC_SITE_BRAND ?? "Shop"}
             width={300}
-            height={90}
+            height={70}
             priority
-            className="h-10 w-auto"    // высота в шапке, ширина авто
+            className="h-14 w-auto"    // высота в шапке, ширина авто
           />
         </Link>
 
