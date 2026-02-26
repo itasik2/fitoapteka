@@ -1,19 +1,14 @@
 
 // app/shop/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ShopGridClient from "@/components/ShopGridClient";
 import FavoritesButton from "@/components/FavoritesButton";
 import InStockButton from "@/components/InStockButton";
-import { SITE_BRAND } from "@/lib/siteConfig";
+import { getPublicBaseUrl, SITE_BRAND } from "@/lib/siteConfig";
 
 export const dynamic = "force-dynamic";
-
-export const metadata = {
-  title: `Каталог – ${SITE_BRAND}`,
-  description:
-    `Каталог ${SITE_BRAND}: очищающие гели, пенки, сыворотки, кремы и другие средства для ухода за кожей.`,
-};
 
 type Props = {
   searchParams?: {
@@ -23,6 +18,64 @@ type Props = {
     instock?: string;
   };
 };
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const baseDescription = `Каталог ${SITE_BRAND}: очищающие гели, пенки, сыворотки, кремы и другие средства для ухода за кожей.`;
+
+  const brandSlug = (searchParams?.brand || "").trim();
+  const baseUrl = getPublicBaseUrl();
+
+  let selectedBrand: { name: string; slug: string } | null = null;
+  let brandKeywords: string[] = [];
+
+  try {
+    const brands = await prisma.brand.findMany({
+      where: { isActive: true },
+      select: { name: true, slug: true },
+      orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+      take: 30,
+    });
+
+    selectedBrand = brandSlug ? brands.find((b) => b.slug === brandSlug) || null : null;
+    brandKeywords = brands.map((b) => b.name);
+  } catch {
+    // metadata остаётся рабочей даже когда БД временно недоступна
+  }
+
+  const title = selectedBrand
+    ? `${selectedBrand.name} — каталог ${SITE_BRAND}`
+    : `Каталог – ${SITE_BRAND}`;
+
+  const description = selectedBrand
+    ? `Купить ${selectedBrand.name} в ${SITE_BRAND}: актуальные цены, наличие и доставка по Казахстану.`
+    : baseDescription;
+
+  const canonical = selectedBrand
+    ? `${baseUrl}/shop?brand=${encodeURIComponent(selectedBrand.slug)}`
+    : `${baseUrl}/shop`;
+
+  const keywords = [
+    "каталог косметики",
+    "купить косметику",
+    "бренды косметики",
+    ...brandKeywords,
+  ];
+
+  return {
+    title,
+    description,
+    keywords,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+    },
+  };
+}
 
 // Тип варианта для клиента
 type Variant = {
@@ -133,9 +186,29 @@ export default async function ShopPage({ searchParams }: Props) {
     variants: toVariants((p as any).variants),
   }));
 
+  const brandsForSeo = brands.map((b) => b.name).join(", ");
+
   return (
 
     <div className="space-y-6 py-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: selectedBrand
+              ? `Каталог ${selectedBrand.name}`
+              : `Каталог ${SITE_BRAND}`,
+            description: selectedBrand
+              ? `Каталог товаров бренда ${selectedBrand.name} в ${SITE_BRAND}.`
+              : `Каталог брендов и товаров ${SITE_BRAND}.`,
+            keywords: brandsForSeo,
+            about: brands.map((b) => ({ "@type": "Brand", name: b.name })),
+          }),
+        }}
+      />
+
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 className="text-2xl font-bold">Каталог</h2>

@@ -58,9 +58,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
+    const brands = await prisma.brand.findMany({
+      where: { isActive: true },
+      select: { slug: true, updatedAt: true },
+      orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+    });
+
+    const brandRoutes: MetadataRoute.Sitemap = brands.map((b) => ({
+      url: `${baseUrl}/shop?brand=${encodeURIComponent(b.slug)}`,
+      lastModified: b.updatedAt || new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
+
     // Можно позже добавить другие динамические сущности (категории и т.п.)
 
-    return [...staticRoutes, ...productRoutes, ...postRoutes];
+    return [...staticRoutes, ...productRoutes, ...postRoutes, ...brandRoutes];
   } catch (error) {
     if (isDatabaseUnavailable(error)) {
       console.warn("Sitemap dynamic routes skipped: database is unavailable.");
