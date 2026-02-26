@@ -1,20 +1,55 @@
-// app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Providers from "./providers";
 import { prisma } from "@/lib/prisma";
-import { SITE_DESCRIPTION, SITE_KEY, SITE_TITLE } from "@/lib/siteConfig";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEY,
+  SITE_TITLE,
+} from "@/lib/siteConfig";
 
 const LEGACY_SETTINGS_ID = "default";
 
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.kz";
+
 export const metadata: Metadata = {
-  title: SITE_TITLE,
-  description: SITE_DESCRIPTION,
-    icons: {
-    icon: "fitoapteka-icon.png",
+  metadataBase: new URL(BASE_URL),
+
+  title: {
+    default: SITE_TITLE,
+    template: `%s | ${SITE_TITLE}`,
   },
+
+  description: SITE_DESCRIPTION,
+
+  alternates: {
+    canonical: BASE_URL,
+  },
+
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: BASE_URL,
+    siteName: SITE_TITLE,
+    locale: "ru_KZ",
+    type: "website",
+  },
+
+  icons: {
+    icon: [
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+
+  manifest: "/site.webmanifest",
 };
 
 function activeNow(s: {
