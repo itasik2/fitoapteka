@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Providers from "./providers";
 import { prisma } from "@/lib/prisma";
 import {
+  getPublicBaseUrl,
   SITE_DESCRIPTION,
   SITE_KEY,
   SITE_TITLE,
@@ -12,8 +13,7 @@ import {
 
 const LEGACY_SETTINGS_ID = "default";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.kz";
+const BASE_URL = getPublicBaseUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -24,6 +24,18 @@ export const metadata: Metadata = {
   },
 
   description: SITE_DESCRIPTION,
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 
   alternates: {
     canonical: BASE_URL,
