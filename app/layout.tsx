@@ -57,7 +57,7 @@ export const metadata: Metadata = {
       { url: "/fitoapteka-icon.png", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/fitoapteka-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
 
