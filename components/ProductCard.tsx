@@ -82,7 +82,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       : product.image;
 
   return (
-    <div className="group relative h-full flex flex-col rounded-2xl bg-white">
+    <div className="group relative h-full flex flex-col rounded-2xl bg-white shadow-sm hover:shadow-md transition-all duration-200 border border-brand-soft/50">
       
       {/* Бейджи */}
       <div className="absolute left-3 top-3 z-10 flex flex-col gap-2">
