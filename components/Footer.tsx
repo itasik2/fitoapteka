@@ -2,6 +2,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SITE_BRAND, SITE_NICHE_LABEL } from "@/lib/siteConfig";
+import { ReactNode } from "react";
+
+/* -------------------- SOCIAL ICON WRAPPER -------------------- */
 
 function SocialIcon({
   href,
@@ -10,7 +13,7 @@ function SocialIcon({
 }: {
   href: string;
   label: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   if (!href) return null;
 
@@ -21,60 +24,23 @@ function SocialIcon({
       rel="noreferrer"
       aria-label={label}
       title={label}
-      className="inline-flex items-center justify-center w-8 h-8 rounded-full border transition text-gray-500 hover:text-gray-900 border-gray-300 hover:border-gray-500"
+      className="inline-flex items-center justify-center w-8 h-8 rounded-full border transition 
+                 text-gray-500 hover:text-gray-900 
+                 border-gray-300 hover:border-gray-500"
     >
       {children}
     </a>
   );
 }
 
-function WhatsAppIcon({ className }: { className?: string }) {
+/* -------------------- ICONS -------------------- */
+
+function InstagramIcon({ className }: { className?: string }) {
   return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 32 32"
-      className={className || "w-4 h-4"}
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M16.001 3C9.383 3 4 8.383 4 15c0 2.64.86 5.09 2.33 7.08L4 29l7.18-2.3A11.93 11.93 0 0016 27c6.617 0 12-5.383 12-12S22.618 3 16.001 3zm0 21.75c-2.24 0-4.34-.65-6.12-1.78l-.44-.27-4.26 1.36 1.39-4.14-.29-.43A9.72 9.72 0 016.25 15c0-5.38 4.38-9.75 9.75-9.75S25.75 9.62 25.75 15 21.38 24.75 16 24.75zm5.36-7.27c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.76.95-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.43-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.14-.14.29-.34.44-.51.15-.17.2-.29.29-.48.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.91-2.19-.24-.58-.49-.5-.66-.51h-.57c-.2 0-.52.07-.8.37-.27.29-1.05 1.03-1.05 2.52 0 1.48 1.08 2.91 1.23 3.11.15.2 2.12 3.23 5.13 4.53.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.72-.7 1.96-1.37.24-.66.24-1.23.17-1.37-.07-.14-.27-.22-.56-.37z" />
-    </svg>
-  );
-}
-
-export default function Footer() {
-  const instagramUrl = "https://instagram.com/your_profile";
-  const telegramUrl = "https://t.me/your_channel";
-  const whatsappUrl = "https://wa.me/7700XXXXXXX";
-  const tiktokUrl = "https://www.tiktok.com/@your_profile";
-
-  return (
-    <footer className="border-t mt-10 text-sm text-gray-600 bg-white">
-      <div className="container mx-auto py-8">
-        
-        {/* МОБИЛЬНАЯ ВЕРСИЯ */}
-        <div className="flex flex-col gap-4 md:hidden">
-          <Link href="/" className="inline-block">
-            <Image
-              src="/fitoapteka-logo.png"
-              alt={SITE_BRAND}
-              width={180}
-              height={50}
-              className="h-10 w-auto"
-            />
-          </Link>
-
-          <p>
-            Магазин категории «{SITE_NICHE_LABEL}»: понятные составы и честные описания.
-          </p>
-
-         <div className="flex gap-2">
-  {/* Instagram */}
-  <SocialIcon href={instagramUrl} label="Instagram">
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="w-4 h-4"
+      className={className || "w-4 h-4"}
       fill="none"
     >
       <rect
@@ -95,14 +61,15 @@ export default function Footer() {
       />
       <circle cx="17" cy="7" r="1" fill="currentColor" />
     </svg>
-  </SocialIcon>
+  );
+}
 
-  {/* Telegram */}
-  <SocialIcon href={telegramUrl} label="Telegram">
+function TelegramIcon({ className }: { className?: string }) {
+  return (
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="w-4 h-4"
+      className={className || "w-4 h-4"}
       fill="none"
     >
       <path
@@ -118,19 +85,28 @@ export default function Footer() {
         strokeLinecap="round"
       />
     </svg>
-  </SocialIcon>
+  );
+}
 
-  {/* WhatsApp */}
-  <SocialIcon href={whatsappUrl} label="WhatsApp">
-    <WhatsAppIcon className="w-4 h-4" />
-  </SocialIcon>
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 32 32"
+      className={className || "w-4 h-4"}
+      fill="currentColor"
+    >
+      <path d="M16.001 3C9.383 3 4 8.383 4 15c0 2.64.86 5.09 2.33 7.08L4 29l7.18-2.3A11.93 11.93 0 0016 27c6.617 0 12-5.383 12-12S22.618 3 16.001 3zm0 21.75c-2.24 0-4.34-.65-6.12-1.78l-.44-.27-4.26 1.36 1.39-4.14-.29-.43A9.72 9.72 0 016.25 15c0-5.38 4.38-9.75 9.75-9.75S25.75 9.62 25.75 15 21.38 24.75 16 24.75zm5.36-7.27c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.76.95-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.43-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.14-.14.29-.34.44-.51.15-.17.2-.29.29-.48.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.91-2.19-.24-.58-.49-.5-.66-.51h-.57c-.2 0-.52.07-.8.37-.27.29-1.05 1.03-1.05 2.52 0 1.48 1.08 2.91 1.23 3.11.15.2 2.12 3.23 5.13 4.53.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.72-.7 1.96-1.37.24-.66.24-1.23.17-1.37-.07-.14-.27-.22-.56-.37z" />
+    </svg>
+  );
+}
 
-  {/* TikTok */}
-  <SocialIcon href={tiktokUrl} label="TikTok">
+function TikTokIcon({ className }: { className?: string }) {
+  return (
     <svg
       aria-hidden="true"
       viewBox="0 0 24 24"
-      className="w-4 h-4"
+      className={className || "w-4 h-4"}
       fill="none"
     >
       <path
@@ -148,13 +124,66 @@ export default function Footer() {
         strokeLinejoin="round"
       />
     </svg>
-  </SocialIcon>
-</div>
+  );
+}
+
+/* -------------------- MAIN FOOTER -------------------- */
+
+export default function Footer() {
+  const socials = [
+    {
+      href: "https://instagram.com/your_profile",
+      label: "Instagram",
+      icon: <InstagramIcon />,
+    },
+    {
+      href: "https://t.me/your_channel",
+      label: "Telegram",
+      icon: <TelegramIcon />,
+    },
+    {
+      href: "https://wa.me/7700XXXXXXX",
+      label: "WhatsApp",
+      icon: <WhatsAppIcon />,
+    },
+    {
+      href: "https://www.tiktok.com/@your_profile",
+      label: "TikTok",
+      icon: <TikTokIcon />,
+    },
+  ];
+
+  return (
+    <footer className="border-t mt-10 text-sm text-gray-600 bg-white">
+      <div className="container mx-auto py-8">
+
+        {/* MOBILE */}
+        <div className="flex flex-col gap-4 md:hidden">
+          <Link href="/" className="inline-block">
+            <Image
+              src="/fitoapteka-logo.png"
+              alt={SITE_BRAND}
+              width={180}
+              height={50}
+              className="h-10 w-auto"
+            />
+          </Link>
+
+          <p>
+            Магазин категории «{SITE_NICHE_LABEL}»: понятные составы и честные описания.
+          </p>
+
+          <div className="flex gap-2">
+            {socials.map((item) => (
+              <SocialIcon key={item.label} href={item.href} label={item.label}>
+                {item.icon}
+              </SocialIcon>
+            ))}
+          </div>
         </div>
 
-        {/* ДЕСКТОП */}
+        {/* DESKTOP */}
         <div className="hidden md:flex md:justify-between md:gap-12">
-          
           <div className="max-w-md space-y-3">
             <Link href="/" className="inline-block">
               <Image
@@ -196,18 +225,11 @@ export default function Footer() {
             <div>
               <div className="font-semibold mb-2">Мы в соцсетях</div>
               <div className="flex gap-2">
-                <SocialIcon href={instagramUrl} label="Instagram">
-                  <span className="w-4 h-4 bg-current rounded-full" />
-                </SocialIcon>
-                <SocialIcon href={telegramUrl} label="Telegram">
-                  <span className="w-4 h-4 bg-current rounded-full" />
-                </SocialIcon>
-                <SocialIcon href={whatsappUrl} label="WhatsApp">
-                  <WhatsAppIcon className="w-4 h-4" />
-                </SocialIcon>
-                <SocialIcon href={tiktokUrl} label="TikTok">
-                  <span className="w-4 h-4 bg-current rounded-full" />
-                </SocialIcon>
+                {socials.map((item) => (
+                  <SocialIcon key={item.label} href={item.href} label={item.label}>
+                    {item.icon}
+                  </SocialIcon>
+                ))}
               </div>
             </div>
           </div>
@@ -216,7 +238,9 @@ export default function Footer() {
 
       <div className="border-t">
         <div className="container mx-auto py-3 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-gray-500">
-          <div>© {new Date().getFullYear()} {SITE_BRAND}. Все права защищены.</div>
+          <div>
+            © {new Date().getFullYear()} {SITE_BRAND}. Все права защищены.
+          </div>
           <div>
             Не является публичной офертой. Перед применением средств консультируйтесь со специалистом.
           </div>
