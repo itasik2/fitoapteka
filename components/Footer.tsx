@@ -68,28 +68,85 @@ export default function Footer() {
             Магазин категории «{SITE_NICHE_LABEL}»: понятные составы и честные описания.
           </p>
 
-          <div className="flex gap-2">
+         <div className="flex gap-2">
+            {/* Instagram */}
             <SocialIcon href={instagramUrl} label="Instagram">
-              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none">
-                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
-                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="w-4 h-4"
+                fill="none"
+              >
+                <rect
+                  x="3"
+                  y="3"
+                  width="18"
+                  height="18"
+                  rx="5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                />
                 <circle cx="17" cy="7" r="1" fill="currentColor" />
               </svg>
             </SocialIcon>
 
+            {/* Telegram */}
             <SocialIcon href={telegramUrl} label="Telegram">
-              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none">
-                <path d="M20.5 4.5L3.5 11.2l4.5 1.6 1.8 4.7 2.4-3.3 4.1 3.1 1.8-13z" stroke="currentColor" strokeWidth="1.6" />
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="w-4 h-4"
+                fill="none"
+              >
+                <path
+                  d="M20.5 4.5L3.5 11.2c-.7.3-.7 1.3 0 1.5l4.5 1.6 1.8 4.7c.2.6 1 .7 1.4.1l2.4-3.3 4.1 3.1c.6.4 1.4.1 1.5-.6l1.8-13c.1-.7-.6-1.2-1.3-1z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M8.5 13.5L18 7.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
               </svg>
             </SocialIcon>
 
+            {/* WhatsApp */}
             <SocialIcon href={whatsappUrl} label="WhatsApp">
               <WhatsAppIcon className="w-4 h-4" />
             </SocialIcon>
 
+            {/* TikTok */}
             <SocialIcon href={tiktokUrl} label="TikTok">
-              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none">
-                <path d="M14.5 5.5V14a3.5 3.5 0 11-3-3.5" stroke="currentColor" strokeWidth="1.6" />
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="w-4 h-4"
+                fill="none"
+              >
+                <path
+                  d="M14.5 5.5V14a3.5 3.5 0 11-3-3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M14.5 5.5c.3.9 1.1 3 3.5 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </SocialIcon>
           </div>
